@@ -9,14 +9,14 @@ public class RomanNumeral {
 	//--------------------------------------------------------------------------
 
 	//--------------------------------------------------------------------------
-	public RomanNumeral set( int number ) {
+	RomanNumeral set( int number ) {
 		this.number = number;
 		return this;
 	}
 	//--------------------------------------------------------------------------
 
 	//--------------------------------------------------------------------------
-	public void stringFormatter( int magnitude, String tens, String fivs, String ones ) {
+	private void stringFormatter( int magnitude, String tens, String fivs, String ones ) {
 		int position = (int) (number % ( magnitude * 10f ) / magnitude);
 
 		switch ( position ) {
