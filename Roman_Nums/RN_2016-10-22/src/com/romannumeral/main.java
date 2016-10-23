@@ -18,6 +18,10 @@ public class main {
 		number.setNumber( 1999 );
 		number.convertToRomanNumeral();
 
+		Number numb1 = new Number();
+		numb1.setNumber( 19920 );
+		numb1.convertToRomanNumeral();
+
 	}
 	//--------------------------------------------------------------------------
 }

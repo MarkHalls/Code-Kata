@@ -42,15 +42,13 @@ public class Number {
 
 	//--------------------------------------------------------------------------
 	public void convertToRomanNumeral(){
-		int magnitude = (int) Math.pow( 10.0, Integer.toString( storedNumber ).length() - 1 );
+		//int magnitude = (int) Math.pow( 10.0, Integer.toString( storedNumber ).length() - 1 );
 
-		if ( ( magnitude / 1000 ) >= 1 ) {
-			int tempNumber = storedNumber / magnitude;
-			for ( int i = 0; i < tempNumber ; i++ ) {
-				builder.append( "M" );
-			}
-			storedNumber %= 1000;
+		while ( storedNumber >= 1000 ){
+			builder.append( "M" );
+			storedNumber -= 1000;
 		}
+
 		calculateStored( 100, "M", "D", "C");
 		calculateStored( 10, "C", "L", "X" );
 		calculateStored( 1, "X", "V", "I" );
