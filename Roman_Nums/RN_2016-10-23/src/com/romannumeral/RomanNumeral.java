@@ -1,7 +1,7 @@
 package com.romannumeral;
 
 //==============================================================================
-public class RomanNumeral {
+class RomanNumeral {
 	//--------------------------------------------------------------------------
 	private int number;
 	private StringBuilder builder = new StringBuilder();
@@ -9,9 +9,8 @@ public class RomanNumeral {
 	//--------------------------------------------------------------------------
 
 	//--------------------------------------------------------------------------
-	RomanNumeral set( int number ) {
+	public RomanNumeral( int number ) {
 		this.number = number;
-		return this;
 	}
 	//--------------------------------------------------------------------------
 
