@@ -5,12 +5,17 @@ package com.romannumeral;
  */
 public class RomanNumeral {
     int number;
+    String numeral;
 
-    RomanNumeral( int number ){
+    RomanNumeral(int number) {
         this.number = number;
     }
 
-    private String formatString( int magnitude, String tens, String fivs, String ones ) {
+    RomanNumeral(String numeral) {
+        this.numeral = numeral;
+    }
+
+    private String formatString(int magnitude, String tens, String fivs, String ones) {
         int position = (int) (number % (magnitude * 10f) / magnitude);
 
         switch (position) {
@@ -32,21 +37,107 @@ public class RomanNumeral {
                 return fivs + ones + ones + ones;
             case 9:
                 return ones + tens;
-            default: return "";
+            default:
+                return "";
         }
     }
 
-    @Override public String toString(){
+    @Override
+    public String toString() {
         StringBuilder builder = new StringBuilder();
-        while ( number > 1000 ) {
-            builder.append( "M" );
+        while (number > 1000) {
+            builder.append("M");
             number -= 1000;
-            }
+        }
 
-        builder.append( formatString( 100, "M", "D", "C" ) );
-        builder.append( formatString( 10,  "C", "L", "X" ) );
-        builder.append( formatString( 1,   "X", "V", "I" ) );
+        builder.append(formatString(100, "M", "D", "C"));
+        builder.append(formatString(10, "C", "L", "X"));
+        builder.append(formatString(1, "X", "V", "I"));
         return builder.toString();
+    }
 
+    public int toInt() {
+        int tempNumber = 0;
+        for (int position = 0; position < numeral.length(); position++) {
+            if ((numeral.length() - position) >= 2) {
+                String tempNumeral = String.valueOf(( numeral.charAt(position) + numeral.charAt(position + 1)));
+                System.out.println(tempNumeral);
+                switch ( tempNumeral ){
+                    case "CM":
+                        tempNumber += 900;
+                        break;
+                    case "CD":
+                        tempNumber += 400;
+                        break;
+                    case "LC":
+                        tempNumber += 90;
+                        break;
+                    case "XL":
+                        tempNumber += 40;
+                        break;
+                    case "IX":
+                        tempNumber += 9;
+                        break;
+                    default:
+                        tempNumeral = String.valueOf(numeral.charAt(position));
+                        switch (tempNumeral) {
+                            case "M":
+                                tempNumber += 1000;
+                                break;
+                            case "D":
+                                tempNumber += 500;
+                                break;
+                            case "C":
+                                tempNumber += 100;
+                                break;
+                            case "L":
+                                tempNumber += 50;
+                                break;
+                            case "X":
+                                tempNumber += 10;
+                                break;
+                            case "V":
+                                tempNumber += 5;
+                                break;
+                            case "I":
+                                tempNumber += 5;
+                                break;
+                            default:
+                                break;
+                        }
+                }
+            }
+                if ((numeral.length() - position) <= 1) {
+                    String tempNumeral = String.valueOf(numeral.charAt(position));
+                    switch (tempNumeral) {
+                        case "M":
+                            tempNumber += 1000;
+                            break;
+                        case "D":
+                            tempNumber += 500;
+                            break;
+                        case "C":
+                            tempNumber += 100;
+                            break;
+                        case "L":
+                            tempNumber += 50;
+                            break;
+                        case "X":
+                            tempNumber += 10;
+                            break;
+                        case "V":
+                            tempNumber += 5;
+                            break;
+                        case "I":
+                            tempNumber += 5;
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+
+            }
+        return tempNumber;
     }
 }
