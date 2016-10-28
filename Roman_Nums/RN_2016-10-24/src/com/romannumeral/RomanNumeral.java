@@ -1,24 +1,50 @@
 package com.romannumeral;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by mh353f on 10/24/2016.
  */
 public class RomanNumeral {
     int number;
     String numeral;
+	private Map<String, Integer> numerals1 = new HashMap<>();
+
+	private void init(){
+		numerals1.put(  "I",    1 );
+		numerals1.put( "IV",    4 );
+		numerals1.put(  "V",    5 );
+		numerals1.put( "IX",    9 );
+		numerals1.put(  "X",   10 );
+		numerals1.put( "XL",   40 );
+		numerals1.put( "XC",   90 );
+		numerals1.put(  "C",  100 );
+		numerals1.put( "CD",  400 );
+		numerals1.put(  "D",  500 );
+		numerals1.put( "CM",  900 );
+		numerals1.put(  "M", 1000 );
+	}
 
     RomanNumeral(int number) {
-        this.number = number;
+        init();
+	    this.number = number;
     }
 
     RomanNumeral(String numeral) {
-        this.numeral = numeral;
+	    init();
+	    this.numeral = numeral;
     }
 
     private String formatString(int magnitude, String tens, String fivs, String ones) {
-        int position = (int) (number % (magnitude * 10f) / magnitude);
+        int positionValue = (int) (number % (magnitude * 10f) / magnitude);
 
-        switch (position) {
+	    for ( Map.Entry<String, Integer> entry : numerals1.entrySet() ){
+	        if ( positionValue == entry.getValue() ) {
+		        numeral += entry.getKey();
+	        }
+    }
+        switch (positionValue) {
             case 1:
                 return ones;
             case 2:
@@ -56,111 +82,9 @@ public class RomanNumeral {
         return builder.toString();
     }
 
+
+
     public int toInt() {
-        int tempNumber = 0;
-        for (int position = 0; position < numeral.length(); position++) {
-            if ((numeral.length() - position) >= 2) {
-                String tempNumeral = String.valueOf( numeral.charAt(position)) + String.valueOf(numeral.charAt(position + 1));
-                switch ( tempNumeral ){
-                    case "CM":
-                        System.out.println(".CM");
-                        tempNumber += 900;
-                        position++;
-                        break;
-                    case "CD":
-                        System.out.println(".CD");
-                        tempNumber += 400;
-                        position++;
-                        break;
-                    case "LC":
-                        System.out.println(".LC");
-                        tempNumber += 90;
-                        position++;
-                        break;
-                    case "XL":
-                        System.out.println(".XL");
-                        tempNumber += 40;
-                        position++;
-                        break;
-                    case "IX":
-                        System.out.println(".IX");
-                        tempNumber += 9;
-                        position++;
-                        break;
-                    default:
-                        tempNumeral = String.valueOf(numeral.charAt(position));
-                        switch (tempNumeral) {
-                            case "M":
-                                System.out.println( ".M");
-                                tempNumber += 1000;
-                                break;
-                            case "D":
-                                System.out.println( ".D");
-                                tempNumber += 500;
-                                break;
-                            case "C":
-                                System.out.println( ".C" );
-                                tempNumber += 100;
-                                break;
-                            case "L":
-                                System.out.println( ".L" );
-                                tempNumber += 50;
-                                break;
-                            case "X":
-                                System.out.println( ".X" );
-                                tempNumber += 10;
-                                break;
-                            case "V":
-                                System.out.println( "V" );
-                                tempNumber += 5;
-                                break;
-                            case "I":
-                                System.out.println( "I" );
-                                tempNumber += 5;
-                                break;
-                            default:
-                                break;
-                        }
-                }
-            }
-                if ((numeral.length() - position) <= 1) {
-                    String tempNumeral = String.valueOf(numeral.charAt(position));
-                    switch (tempNumeral) {
-                        case "M":
-                            System.out.println( ".M");
-                            tempNumber += 1000;
-                            break;
-                        case "D":
-                            System.out.println( ".D");
-                            tempNumber += 500;
-                            break;
-                        case "C":
-                            System.out.println( ".C" );
-                            tempNumber += 100;
-                            break;
-                        case "L":
-                            System.out.println( ".L" );
-                            tempNumber += 50;
-                            break;
-                        case "X":
-                            System.out.println( ".X" );
-                            tempNumber += 10;
-                            break;
-                        case "V":
-                            System.out.println( "V" );
-                            tempNumber += 5;
-                            break;
-                        case "I":
-                            System.out.println( "I" );
-                            tempNumber += 5;
-                            break;
-                        default:
-                            break;
-                    }
 
-                }
 
-            }
-        return tempNumber;
-    }
 }
