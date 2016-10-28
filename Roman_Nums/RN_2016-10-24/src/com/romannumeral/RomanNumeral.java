@@ -8,10 +8,24 @@ import java.util.Map;
  */
 public class RomanNumeral {
 	int number;
-	StringBuilder numeral = new StringBuilder();
+	String ones;
+	String fivs;
+	String tens;
+
 	private Map<String, Integer> romanNumeralMap = new HashMap<>();
+	private Map<Integer, String> numberMap = new HashMap<>();
 
 	private void init() {
+		numberMap.put( 1, ones                  );
+		numberMap.put( 2, ones + ones           );
+		numberMap.put( 3, ones + ones + ones    );
+		numberMap.put( 4, ones + fivs           );
+		numberMap.put( 5, fivs                  );
+		numberMap.put( 6, fivs + ones           );
+		numberMap.put( 7, fivs + ones + ones    );
+		numberMap.put( 8, fivs + ones + ones    );
+		numberMap.put( 9, ones + tens           );
+
 		romanNumeralMap.put( " I", 1 );
 		romanNumeralMap.put( " V", 5 );
 		romanNumeralMap.put( " X", 10 );
@@ -33,19 +47,32 @@ public class RomanNumeral {
 
 	@Override
 	public String toString() {
+		StringBuilder numeral = new StringBuilder();
 		int magnitude = 1000;
-		while ( magnitude >= 1 ){
-		int positionValue = (int) ( number % ( magnitude * 10f ) / magnitude );
-		for ( Map.Entry<String, Integer> entry : romanNumeralMap.entrySet() ) {
-				if ( entry.getValue() / magnitude > 0 ) {
 
-					}
-					numeral.append( entry.getKey() );
-					}
-				}
-			magnitude /= 10;
+		int positionValue = (int) ( number % ( magnitude * 10f ) / magnitude );
+
+		switch ( positionValue ) {
+			case 1:
+
+
+		}
+
+
+
+					for ( Map.Entry<String, Integer> entry : romanNumeralMap.entrySet() ) {
+
+
+
+//				if ( romanNumeralMap.getOrDefault(  ) ) {
+
+//					}
+//					numeral.append( entry.getKey() );
+//					}
+//			magnitude /= 10;
+//				}
+//		return numeral.toString();
 			}
-		return numeral.toString();
 		}
 	}
 
